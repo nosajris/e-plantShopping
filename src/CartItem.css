@@ -24,7 +24,7 @@
   font-style: italic;
 }
 
-.cart-items {
+.cart-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -52,24 +52,24 @@
   flex-grow: 1;
 }
 
-.cart-item-details h3 {
+.cart-item-name {
   margin: 0 0 0.25rem;
 }
 
-.cart-item-unit-price {
+.cart-item-cost {
   color: #5a6b5d;
   margin: 0 0 0.5rem;
   font-size: 0.9rem;
 }
 
-.quantity-controls {
+.cart-item-quantity {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 0.5rem;
 }
 
-.quantity-controls button {
+.cart-item-button {
   width: 28px;
   height: 28px;
   border-radius: 6px;
@@ -79,23 +79,23 @@
   cursor: pointer;
 }
 
-.quantity-controls button:hover {
+.cart-item-button:hover {
   background: #dce8d8;
 }
 
-.quantity-value {
+.cart-item-quantity-value {
   min-width: 1.5rem;
   text-align: center;
   font-weight: 600;
 }
 
-.cart-item-subtotal {
+.cart-item-total {
   font-weight: 700;
   color: #1f4d3a;
   margin: 0.25rem 0 0.5rem;
 }
 
-.delete-btn {
+.cart-item-delete {
   background: none;
   border: 1px solid #e85b4a;
   color: #e85b4a;
@@ -105,7 +105,7 @@
   font-weight: 600;
 }
 
-.delete-btn:hover {
+.cart-item-delete:hover {
   background: #e85b4a;
   color: #fff;
 }
@@ -139,10 +139,4 @@
 
 .checkout-btn:hover {
   background: #3d8b40;
-}
-
-.checkout-message {
-  margin-top: 1rem;
-  font-weight: 700;
-  color: #2f6b4a;
 }

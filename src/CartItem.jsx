@@ -1,27 +1,46 @@
-import { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import {
-  selectCartItems,
-  selectTotalQuantity,
-  selectTotalCost,
-  incrementQuantity,
-  decrementQuantity,
-  removeItem,
-} from './CartSlice';
+import { selectCartItems, updateQuantity, removeItem } from './CartSlice';
 import './CartItem.css';
 
-function CartItem() {
+function CartItem({ onContinueShopping }) {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
-  const totalQuantity = useSelector(selectTotalQuantity);
-  const totalCost = useSelector(selectTotalCost);
-  const [checkoutMessage, setCheckoutMessage] = useState('');
 
-  const handleIncrement = (name) => dispatch(incrementQuantity(name));
-  const handleDecrement = (name) => dispatch(decrementQuantity(name));
-  const handleDelete = (name) => dispatch(removeItem(name));
-  const handleCheckout = () => setCheckoutMessage('Coming Soon');
+  // Calculates the total amount for all products in the cart
+  const calculateTotalAmount = () =>
+    cartItems.reduce((total, item) => total + item.cost * item.quantity, 0);
+
+  const calculateTotalQuantity = () =>
+    cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  // Calculates the subtotal for a single item based on quantity and cost
+  const calculateTotalCost = (item) => item.cost * item.quantity;
+
+  const handleIncrement = (item) => {
+    dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
+  };
+
+  const handleDecrement = (item) => {
+    if (item.quantity > 1) {
+      dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+    } else {
+      dispatch(removeItem(item.name));
+    }
+  };
+
+  const handleRemove = (item) => {
+    dispatch(removeItem(item.name));
+  };
+
+  const handleContinueShopping = (e) => {
+    e.preventDefault();
+    onContinueShopping();
+  };
+
+  const handleCheckoutShopping = () => {
+    alert('Coming Soon');
+  };
 
   return (
     <main className="cart-page">
@@ -29,36 +48,44 @@ function CartItem() {
 
       <div className="cart-summary">
         <p>
-          Total Plants: <strong>{totalQuantity}</strong>
+          Total Plants: <strong>{calculateTotalQuantity()}</strong>
         </p>
         <p>
-          Total Cost: <strong>${totalCost.toFixed(2)}</strong>
+          Total Cost: <strong>${calculateTotalAmount().toFixed(2)}</strong>
         </p>
       </div>
 
       {cartItems.length === 0 ? (
         <p className="empty-cart">Your cart is empty. Go find your next favorite plant!</p>
       ) : (
-        <div className="cart-items">
+        <div className="cart-container">
           {cartItems.map((item) => (
             <div className="cart-item" key={item.name}>
               <img src={item.image} alt={item.name} className="cart-item-thumbnail" />
               <div className="cart-item-details">
-                <h3>{item.name}</h3>
-                <p className="cart-item-unit-price">Unit price: ${item.price.toFixed(2)}</p>
-                <div className="quantity-controls">
-                  <button onClick={() => handleDecrement(item.name)} aria-label={`Decrease ${item.name} quantity`}>
+                <h3 className="cart-item-name">{item.name}</h3>
+                <p className="cart-item-cost">Unit price: ${item.cost.toFixed(2)}</p>
+                <div className="cart-item-quantity">
+                  <button
+                    className="cart-item-button cart-item-button-dec"
+                    onClick={() => handleDecrement(item)}
+                    aria-label={`Decrease ${item.name} quantity`}
+                  >
                     -
                   </button>
-                  <span className="quantity-value">{item.quantity}</span>
-                  <button onClick={() => handleIncrement(item.name)} aria-label={`Increase ${item.name} quantity`}>
+                  <span className="cart-item-quantity-value">{item.quantity}</span>
+                  <button
+                    className="cart-item-button cart-item-button-inc"
+                    onClick={() => handleIncrement(item)}
+                    aria-label={`Increase ${item.name} quantity`}
+                  >
                     +
                   </button>
                 </div>
-                <p className="cart-item-subtotal">
-                  Subtotal: ${(item.price * item.quantity).toFixed(2)}
+                <p className="cart-item-total">
+                  Subtotal: ${calculateTotalCost(item).toFixed(2)}
                 </p>
-                <button className="delete-btn" onClick={() => handleDelete(item.name)}>
+                <button className="cart-item-delete" onClick={() => handleRemove(item)}>
                   Delete
                 </button>
               </div>
@@ -68,14 +95,13 @@ function CartItem() {
       )}
 
       <div className="cart-actions">
-        <Link to="/products" className="continue-shopping-btn">
+        <button className="continue-shopping-btn" onClick={handleContinueShopping}>
           Continue Shopping
-        </Link>
-        <button className="checkout-btn" onClick={handleCheckout}>
+        </button>
+        <button className="checkout-btn" onClick={handleCheckoutShopping}>
           Checkout
         </button>
       </div>
-      {checkoutMessage && <p className="checkout-message">{checkoutMessage}</p>}
     </main>
   );
 }

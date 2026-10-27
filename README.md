@@ -9,26 +9,28 @@ Front-End Apps with React" course on Coursera.
 
 ## Features
 
-- **Landing page** — background image, company introduction, and a "Get
-  Started" button that routes to the product listing.
-- **Product listing page** — 9 houseplants across 3 categories (Air
-  Purifying Plants, Succulents, Low Light Plants), each with a thumbnail,
-  name, price, and an "Add to Cart" button that disables once added.
-- **Shopping cart page** — total item count, total cost, per-plant
+- **Landing page** — background image, company name ("Welcome to Paradise
+  Nursery"), an about-us paragraph, and a "Get Started" button that switches
+  to the product listing.
+- **Product listing page** — 18 houseplants across 3 categories (Air
+  Purifying Plants, Succulents, Low Light Plants; 6 plants per category),
+  each with a thumbnail, name, and price, and an "Add to Cart" button that
+  disables once added.
+- **Shopping cart page** — total plant count, total cost, per-plant
   thumbnail/name/unit price/subtotal, increase/decrease quantity controls,
   a delete button, a "Continue Shopping" button, and a "Checkout" button
   that shows a "Coming Soon" message.
-- **Header/Navbar** — appears on both the product listing and cart pages,
-  with navigation to Home, Plants, and Cart, and a cart icon that updates
-  dynamically with the total number of items.
-- State is managed with **Redux Toolkit** (`src/CartSlice.jsx`), and routing
-  is handled with **React Router**.
+- **Navbar** — rendered on both the product listing and cart views, with
+  links to Home, Plants, and Cart, and a cart icon that updates dynamically
+  with the total number of items.
+- State is managed with **Redux Toolkit** (`src/CartSlice.jsx`); page
+  navigation (landing → products → cart) is handled with local component
+  state rather than a router.
 
 ## Tech stack
 
 - React 19 + Vite
 - Redux Toolkit / React Redux
-- React Router
 - Plain CSS (no UI framework)
 
 ## Getting started
@@ -57,16 +59,14 @@ https://nosajris.github.io/paradise_nusery
 
 ```
 src/
-  App.jsx            # routes + landing page
-  App.css            # landing page styles incl. background image
-  AboutUs.jsx         # company description paragraph
-  Header.jsx          # navbar + dynamic cart icon
-  ProductList.jsx      # product listing page
+  App.jsx             # top-level state switch: landing page <-> ProductList
+  App.css              # landing page styles incl. background image
+  AboutUs.jsx           # company description paragraph
+  ProductList.jsx        # plantsArray, Navbar, product listing, and cart toggle
   ProductList.css
-  CartItem.jsx         # shopping cart page
+  CartItem.jsx            # shopping cart view
   CartItem.css
-  CartSlice.jsx         # Redux slice for the cart
-  store.js             # Redux store
-  plantsData.js         # plant catalog (name, price, category, image)
-  assets/              # original SVG illustrations (plants + hero background)
+  CartSlice.jsx             # Redux slice for the cart (addItem/removeItem/updateQuantity)
+  store.js                 # Redux store
+  assets/                   # original SVG illustrations (plants + hero background)
 ```

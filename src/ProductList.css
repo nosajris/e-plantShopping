@@ -1,19 +1,93 @@
-.product-list-page {
+/* --- Navbar --- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #1f4d3a;
+  color: #fff;
+  flex-wrap: wrap;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-brand {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #e4efe4;
+  font-weight: 500;
+  padding: 0.4rem 0.2rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #fff;
+  border-bottom-color: #7bc47f;
+}
+
+.cart-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cart-icon {
+  position: relative;
+  font-size: 1.1rem;
+}
+
+.cart_quantity_count {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background-color: #e85b4a;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0 4px;
+}
+
+/* --- Product listing --- */
+.product-grid-wrapper {
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-.product-list-page h1 {
+.product-grid-wrapper h1 {
   margin-bottom: 1.5rem;
   color: #1f4d3a;
 }
 
-.category-section {
+.product-list {
   margin-bottom: 2.5rem;
 }
 
-.category-section h2 {
+.product-list h2 {
   border-bottom: 2px solid #dce8d8;
   padding-bottom: 0.5rem;
   margin-bottom: 1.25rem;
@@ -55,7 +129,7 @@
   flex-grow: 1;
 }
 
-.plant-price {
+.plant-cost {
   font-weight: 700;
   font-size: 1.1rem;
   color: #1f4d3a;
