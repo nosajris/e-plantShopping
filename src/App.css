@@ -1,0 +1,55 @@
+.landing-page {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url('./assets/hero-bg.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.landing-overlay {
+  max-width: 640px;
+  background: rgba(10, 30, 20, 0.45);
+  backdrop-filter: blur(2px);
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  color: #f5f7f0;
+}
+
+.company-name {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin: 0 0 1.25rem;
+  color: #eaf6ea;
+}
+
+.about-paragraph {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #e4efe4;
+  margin: 0 0 2rem;
+}
+
+.get-started-btn {
+  display: inline-block;
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.get-started-btn:hover {
+  background-color: #3d8b40;
+  transform: translateY(-2px);
+}
